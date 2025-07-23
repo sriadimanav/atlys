@@ -1,0 +1,15 @@
+.feedContainer {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.editorWrapper {
+  margin-bottom: 24px;
+}
+
+.postsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

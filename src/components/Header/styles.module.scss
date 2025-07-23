@@ -1,0 +1,21 @@
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  //border-bottom: 1px solid lightgray;
+}
+
+.leftBox,
+.rightBox {
+  display: flex;
+  align-items: center;
+  padding: 25px 100px;
+  gap: 5px;
+  border-radius: 5px;
+}
+
+.leftBox:hover,
+.rightBox:hover {
+  cursor: pointer;
+}

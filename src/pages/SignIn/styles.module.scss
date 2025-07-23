@@ -1,0 +1,43 @@
+.formContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.outerFormBox {
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 8px 30px 8px; // trbl
+  border-radius: 20px;
+  width: 90%;
+  max-width: 450px;
+}
+
+.innerFormBox {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+  width: 90%;
+  border-radius: 18px;
+  margin-bottom: 20px;
+}
+
+.iconBox {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f6f6f6;
+  margin-bottom: 10px;
+}
+
+.link:hover {
+  cursor: pointer;
+}
