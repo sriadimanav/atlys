@@ -12,7 +12,7 @@ This is a modern React app demonstrating:
 
 ## 🚀 Live Demo
 
-[🔗 View Deployed App](atlys-rho.vercel.app)
+https://atlys-rho.vercel.app/
 
 ## 🎥 Demo Video
 
