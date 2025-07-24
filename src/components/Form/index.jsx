@@ -5,7 +5,7 @@ import Text from '@components/Text';
 import { useAuth } from '@hooks/useAuth';
 import { useNavigate } from 'react-router';
 
-const Form = ({ page }) => {
+const Form = ({ page, setShowModal }) => {
   const {
     register,
     handleSubmit,
@@ -13,7 +13,7 @@ const Form = ({ page }) => {
     setError,
     clearErrors,
     formState: { errors },
-  } = useForm({ reValidateMode: 'all', mode: 'all' });
+  } = useForm();
 
   const passwordVal = watch('password');
 
@@ -21,17 +21,17 @@ const Form = ({ page }) => {
 
   const { login } = useAuth();
 
-  const onSignInFormSubmit = (data) => {
+  const onSignInFormSubmit = data => {
     if (!data) return;
     const usersCreds = JSON.parse(sessionStorage.getItem('usersCreds'));
 
     const user = usersCreds.find(
-      (u) =>
-        u.email === data.email?.trim() && u.password === data.password?.trim(),
+      u => u.email === data.email?.trim() && u.password === data.password?.trim(),
     );
 
     if (user) {
       login();
+      setShowModal?.(false);
       navigate('/');
       clearErrors('userNotFound');
     } else {
@@ -42,20 +42,18 @@ const Form = ({ page }) => {
     }
   };
 
-  const onSignUpFormSubmit = (data) => {
+  const onSignUpFormSubmit = data => {
     if (!data) return;
 
     const usersCreds = JSON.parse(sessionStorage.getItem('usersCreds'));
 
     sessionStorage.setItem(
       'usersCreds',
-      JSON.stringify([
-        ...usersCreds,
-        { email: data.email, password: data.password },
-      ]),
+      JSON.stringify([...usersCreds, { email: data.email, password: data.password }]),
     );
 
     login();
+    setShowModal?.(false);
     navigate('/');
   };
 
@@ -80,19 +78,12 @@ const Form = ({ page }) => {
 
   const emailField = () => (
     <div key={'email'}>
-      <Text
-        as="label"
-        htmlFor="email"
-        className={styles.label}
-        weight={500}
-        size={14}
-      >
+      <Text as="label" htmlFor="email" className={styles.label} weight={500} size={14}>
         Email or username
       </Text>
       <input
         {...register('email', emailConfig)}
         onChange={() => clearErrors('userNotFound')}
-        defaultValue={'test@gmail.com'}
         type="email"
         placeholder="Enter your email or username"
         id="email"
@@ -123,19 +114,12 @@ const Form = ({ page }) => {
 
   const passwordField = () => (
     <div key={'password'}>
-      <Text
-        as="label"
-        htmlFor="password"
-        className={styles.label}
-        weight={500}
-        size={14}
-      >
+      <Text as="label" htmlFor="password" className={styles.label} weight={500} size={14}>
         Password
       </Text>
       <input
         {...register('password', passwordConfig)}
         onChange={() => clearErrors('userNotFound')}
-        defaultValue={'Test@123456'}
         type="password"
         placeholder="Enter your password"
         id="password"
@@ -152,13 +136,7 @@ const Form = ({ page }) => {
 
   const confirmPasswordField = () => (
     <div key={'confirmPassword'}>
-      <Text
-        as="label"
-        htmlFor="confirmPassword"
-        className={styles.label}
-        weight={500}
-        size={14}
-      >
+      <Text as="label" htmlFor="confirmPassword" className={styles.label} weight={500} size={14}>
         Repeat Password
       </Text>
       <input
@@ -167,7 +145,7 @@ const Form = ({ page }) => {
             value: true,
             message: 'This field is required',
           },
-          validate: (confirmPasswordVal) =>
+          validate: confirmPasswordVal =>
             confirmPasswordVal === passwordVal || 'Password did not match',
         })}
         type="password"
@@ -192,13 +170,10 @@ const Form = ({ page }) => {
   return (
     <form
       onSubmit={
-        page === 'signin'
-          ? handleSubmit(onSignInFormSubmit)
-          : handleSubmit(onSignUpFormSubmit)
+        page === 'signin' ? handleSubmit(onSignInFormSubmit) : handleSubmit(onSignUpFormSubmit)
       }
-      className={styles.form}
-    >
-      {pageMap[page].map((field) => field())}
+      className={styles.form}>
+      {pageMap[page].map(field => field())}
 
       <button className={styles.btn} type="submit">
         {page === 'signin' ? 'Sign In' : 'Sign Up'}

@@ -6,7 +6,7 @@ var periods = {
   minute: 60 * 1000,
 };
 
-export const formatTime = (timeCreated) => {
+export const formatTime = timeCreated => {
   var diff = Date.now() - timeCreated;
 
   if (diff > periods.month) {

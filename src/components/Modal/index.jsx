@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import styles from './styles.module.scss';
 
 const Modal = ({ visible = false, onClose, children }) => {
-  const handleBackdropClick = (e) => {
+  const handleBackdropClick = e => {
     if (e.target === e.currentTarget) {
       onClose();
     }

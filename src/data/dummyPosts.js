@@ -21,52 +21,25 @@ export const dummyPosts = [
     name: 'Jane Doe',
     time: 1752258600000,
     avatar: 'https://avatar.iran.liara.run/public/3',
-    mood: '💀',
+    mood: '😎',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
   {
     id: 4,
-    name: 'Jane Doe',
+    name: 'Ezekiel Stanton',
     time: 1752949800000,
     avatar: 'https://avatar.iran.liara.run/public/4',
-    mood: '💀',
+    mood: '😂',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },
   {
     id: 5,
-    name: 'Jane Doe',
+    name: 'Lemuel Romero',
     time: 1747679400000,
     avatar: 'https://avatar.iran.liara.run/public/5',
-    mood: '💀',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  },
-  {
-    id: 6,
-    name: 'Jane Doe',
-    time: 1750357800000,
-    avatar: 'https://avatar.iran.liara.run/public/6',
-    mood: '💀',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  },
-  {
-    id: 7,
-    name: 'Jane Doe',
-    time: 1751308200000,
-    avatar: 'https://avatar.iran.liara.run/public/7',
-    mood: '💀',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  },
-  {
-    id: 8,
-    name: 'Jane Doe',
-    time: 1752517800000,
-    avatar: 'https://avatar.iran.liara.run/public/8',
-    mood: '💀',
+    mood: '😌',
     content:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
   },

@@ -14,14 +14,16 @@ import {
   CodeXml,
   Trash2,
 } from 'lucide-react';
+import { useAtom } from 'jotai';
 
 import Dropdown from '@components/Dropdown';
+
 import useEmojiPicker from '@hooks/useEmojiPicker';
+import { moodAtom } from '@atoms/moodAtom';
+import { useAuth } from '@hooks/useAuth';
 
 import styles from './styles.module.scss';
-import { moodAtom } from '@atoms/moodAtom';
-import { useAtom } from 'jotai';
-import { useAuth } from '@hooks/useAuth';
+import { useToast } from '@hooks/useToast';
 
 const PostEditor = ({ onPublish, setShowModal }) => {
   const [text, setText] = useState('');
@@ -29,6 +31,8 @@ const PostEditor = ({ onPublish, setShowModal }) => {
   const [mood, setMood] = useAtom(moodAtom);
 
   const { isAuthenticated } = useAuth();
+
+  const { addToast } = useToast();
 
   const { picker, toggle } = useEmojiPicker({ onSelect: setMood });
 
@@ -39,14 +43,24 @@ const PostEditor = ({ onPublish, setShowModal }) => {
     }
   };
 
+  const handleParentClick = e => {
+    if (!isAuthenticated) {
+      e.stopPropagation(); // Prevent click events from propagating to children
+      e.preventDefault(); // Optional: prevent any default behavior
+      setShowModal(true);
+      return;
+    }
+  };
+
+  const handleActionClick = action => {
+    addToast({ content: `🔔 ${action} functionality not implemented` });
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onMouseDown={handleParentClick}>
       {picker}
 
-      <div
-        className={styles.editor}
-        onClick={() => !isAuthenticated && setShowModal(true)}
-      >
+      <div className={styles.editor}>
         <div className={styles.tools}>
           <div className={styles.styleTools}>
             <Dropdown
@@ -54,52 +68,97 @@ const PostEditor = ({ onPublish, setShowModal }) => {
               defaultValue={{ value: 'paragraph', label: 'Paragraph' }}
             />
             <div></div>
-            <Bold className={styles.icon} size={16} color="#222831" />
-            <Italic className={styles.icon} size={16} color="#222831" />
-            <Underline className={styles.icon} size={16} color="#222831" />
+            <Bold
+              className={styles.icon}
+              size={16}
+              color="#222831"
+              onClick={() => handleActionClick('Bold')}
+            />
+            <Italic
+              className={styles.icon}
+              size={16}
+              color="#222831"
+              onClick={() => handleActionClick('Italic')}
+            />
+            <Underline
+              className={styles.icon}
+              size={16}
+              color="#222831"
+              onClick={() => handleActionClick('Underline')}
+            />
             <div className={styles.separator}></div>
-            <List className={styles.icon} size={16} color="#222831" />
-            <ListOrdered className={styles.icon} size={16} color="#222831" />
+            <List
+              className={styles.icon}
+              size={16}
+              color="#222831"
+              onClick={() => handleActionClick('List')}
+            />
+            <ListOrdered
+              className={styles.icon}
+              size={16}
+              color="#222831"
+              onClick={() => handleActionClick('Ordered List')}
+            />
             <div className={styles.separator}></div>
-            <Quote className={styles.icon} size={16} color="#222831" />
-            <CodeXml className={styles.icon} size={16} color="#222831" />
+            <Quote
+              className={styles.icon}
+              size={16}
+              color="#222831"
+              onClick={() => handleActionClick('Quote')}
+            />
+            <CodeXml
+              className={styles.icon}
+              size={16}
+              color="#222831"
+              onClick={() => handleActionClick('Code Snippet')}
+            />
           </div>
 
           <div></div>
 
           <div className={styles.clearText}>
-            <Trash2 className={styles.icon} size={16} color="#DC3C22" />
+            <Trash2 className={styles.icon} size={16} color="#DC3C22" onClick={() => setText('')} />
           </div>
         </div>
 
         <div className={styles.post}>
           {mood ? (
-            <p className={styles.moodEmoji2} onClick={toggle}>
+            <p className={styles.moodEmojiSelected} onClick={toggle}>
               {mood}
             </p>
           ) : (
-            <Smile
-              size={16}
-              color="#4f5bd5"
-              className={styles.moodEmoji}
-              onClick={toggle}
-            />
+            <Smile size={16} color="#4f5bd5" className={styles.moodEmojiInitial} onClick={toggle} />
           )}
 
           <textarea
             placeholder="What's on your mind?"
             value={text}
-            onChange={(e) => setText(e.target.value)}
+            onChange={e => setText(e.target.value)}
             className={styles.textarea}
           />
         </div>
 
         <div className={styles.actions}>
           <div className={styles.iconBox}>
-            <Plus className={styles.icon} size={16} color="#222831" />
+            <Plus
+              className={styles.icon}
+              size={16}
+              color="#222831"
+              onClick={() => handleActionClick('Add File')}
+            />
           </div>
-          <Mic className={styles.icon} size={16} color="#222831" />
-          <Video className={styles.icon} size={16} color="#222831" />
+          <Mic
+            className={styles.icon}
+            size={16}
+            color="#222831"
+            onClick={() => handleActionClick('Audio')}
+          />
+          <Video
+            className={styles.icon}
+            size={16}
+            color="#222831"
+            onClick={() => handleActionClick('Camera')}
+          />
           <div></div>
           <SendHorizontal
             className={styles.icon}

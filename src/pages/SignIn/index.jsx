@@ -7,7 +7,7 @@ import Form from '@components/Form';
 
 import styles from './styles.module.scss';
 
-export const SignInForm = ({ secondaryAction }) => {
+export const SignInForm = ({ secondaryAction, setShowModal }) => {
   return (
     <div className={styles.outerFormBox}>
       <div className={styles.innerFormBox}>
@@ -21,7 +21,7 @@ export const SignInForm = ({ secondaryAction }) => {
           Sign-in to access all the features on this app
         </Text>
 
-        <Form page="signin" />
+        <Form page="signin" setShowModal={setShowModal} />
       </div>
 
       <div>
@@ -34,8 +34,7 @@ export const SignInForm = ({ secondaryAction }) => {
           onClick={secondaryAction}
           color="#007bff"
           size={14}
-          className={styles.link}
-        >
+          className={styles.link}>
           Sign Up
         </Text>
       </div>

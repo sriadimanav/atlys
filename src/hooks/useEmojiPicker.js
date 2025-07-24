@@ -4,7 +4,7 @@ import { useState, useCallback, useMemo } from 'react';
 const useEmojiPicker = ({ onSelect }) => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const toggle = useCallback(() => setIsVisible((prev) => !prev), []);
+  const toggle = useCallback(() => setIsVisible(prev => !prev), []);
   const show = useCallback(() => setIsVisible(true), []);
   const hide = useCallback(() => setIsVisible(false), []);
 
@@ -12,7 +12,7 @@ const useEmojiPicker = ({ onSelect }) => {
     () => (
       <EmojiPickerComp
         isVisible={isVisible}
-        onSelect={(emoji) => {
+        onSelect={emoji => {
           onSelect(emoji);
           hide(); // auto-close on selection
         }}

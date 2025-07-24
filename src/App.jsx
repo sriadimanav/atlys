@@ -1,14 +1,22 @@
+import { useEffect } from 'react';
+
 import AppRouter from '@routes/AppRouter';
+import ToastContainer from '@components/Toast/ToastContainer';
+import { usersCreds } from '@data/usersCreds';
 
 import './App.scss';
-import { useEffect } from 'react';
-import { usersCreds } from '@data/usersCreds';
 
 const App = () => {
   useEffect(() => {
     sessionStorage.setItem('usersCreds', JSON.stringify(usersCreds));
   }, []);
-  return <AppRouter />;
+
+  return (
+    <>
+      <ToastContainer />
+      <AppRouter />
+    </>
+  );
 };
 
 export default App;

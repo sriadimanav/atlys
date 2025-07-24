@@ -21,17 +21,11 @@ const Header = ({ type }) => {
           onClick={() => {
             logout();
             navigate('/signin');
-          }}
-        >
+          }}>
           logout
         </Text>
       ) : (
-        <Text
-          size={16}
-          weight="bold"
-          color="black"
-          onClick={() => navigate('/signin')}
-        >
+        <Text size={16} weight="bold" color="black" onClick={() => navigate('/signin')}>
           login
         </Text>
       )}
@@ -55,12 +49,7 @@ const Header = ({ type }) => {
     <div className={styles.container}>
       <div className={styles.leftBox}>
         <Webhook color="black" size={18} />
-        <Text
-          size={16}
-          weight="bold"
-          color="black"
-          onClick={() => navigate('/')}
-        >
+        <Text size={16} weight="bold" color="black" onClick={() => navigate('/')}>
           foo-rum
         </Text>
       </div>

@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import { useState } from 'react';
 import { formatTime } from '@utils/formatTime';
 import { useAuth } from '@hooks/useAuth';
+import { useToast } from '@hooks/useToast';
 
 const FeedPost = ({ post, setShowModal }) => {
   const [liked, setLiked] = useState(false);
@@ -11,19 +12,21 @@ const FeedPost = ({ post, setShowModal }) => {
 
   const { isAuthenticated } = useAuth();
 
+  const { addToast } = useToast();
+
   const handleHeartClick = () => {
-    setLiked((prev) => !prev);
+    setLiked(prev => !prev);
     setAnimate(true);
     setTimeout(() => setAnimate(false), 300);
   };
 
-  const handleActionClick = (action) => {
+  const handleActionClick = action => {
     if (!isAuthenticated) {
       setShowModal(true);
       return;
     }
     if (action === 'Like') handleHeartClick();
-    else alert(`${action} functionality not implemented`);
+    else addToast({ content: `🔔 ${action} functionality not implemented` });
   };
 
   return (

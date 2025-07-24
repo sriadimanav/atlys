@@ -14,8 +14,7 @@ const EmojiPicker = ({ isVisible, onSelect, onClose }) => {
           onClick={() => {
             onSelect(emoji);
             onClose?.();
-          }}
-        >
+          }}>
           {emoji}
         </span>
       ))}

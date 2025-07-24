@@ -13,6 +13,7 @@ import { moodAtom } from '@atoms/moodAtom';
 import useEmojiPicker from '@hooks/useEmojiPicker';
 import { dummyPosts } from '@data/dummyPosts';
 import { formatTime } from '@utils/formatTime';
+import { useToast } from '@hooks/useToast';
 
 import styles from './styles.module.scss';
 
@@ -25,7 +26,9 @@ const Feed = () => {
 
   const { show } = useEmojiPicker({ onSelect: () => {} });
 
-  const handlePublish = (text) => {
+  const { addToast } = useToast();
+
+  const handlePublish = text => {
     if (!text.trim()?.length) return;
 
     if (!mood) show();
@@ -48,20 +51,20 @@ const Feed = () => {
       <Header type="landing" />
       <div className={styles.feedContainer}>
         <div className={styles.editorWrapper}>
-          <PostEditor onPublish={handlePublish} setShowModal={setShowModal} />
+          <PostEditor onPublish={handlePublish} setShowModal={setShowModal} addToast={addToast} />
         </div>
 
         <div className={styles.postsList}>
-          {posts.map((post) => (
-            <FeedPost key={post.id} post={post} setShowModal={setShowModal} />
+          {posts.map(post => (
+            <FeedPost key={post.id} post={post} setShowModal={setShowModal} addToast={addToast} />
           ))}
         </div>
 
         <Modal visible={showModal} onClose={() => setShowModal(false)}>
           {formType === 'signin' ? (
-            <SignInForm secondaryAction={() => setFormType('signup')} />
+            <SignInForm secondaryAction={() => setFormType('signup')} setShowModal={setShowModal} />
           ) : (
-            <SignUpForm secondaryAction={() => setFormType('signin')} />
+            <SignUpForm secondaryAction={() => setFormType('signin')} setShowModal={setShowModal} />
           )}
         </Modal>
 

@@ -64,6 +64,7 @@
 
 .post {
   display: flex;
+  justify-content: space-evenly;
 }
 
 /* MoodEmoji */
@@ -98,7 +99,7 @@
   }
 }
 
-.moodEmoji {
+.moodEmojiInitial {
   width: 15px;
   height: 15px;
   padding: 8px;
@@ -156,7 +157,7 @@
   }
 }
 
-.moodEmoji2 {
+.moodEmojiSelected {
   width: 15px;
   height: 15px;
   padding: 8px;
@@ -167,15 +168,7 @@
   cursor: pointer;
   transform-origin: center;
 
-  background: linear-gradient(
-    120deg,
-    #b7f8db,
-    #d4fc79,
-    #96e6a1,
-    #fddb92,
-    #c1dfc4,
-    #b7f8db
-  );
+  background: linear-gradient(120deg, #b7f8db, #d4fc79, #96e6a1, #fddb92, #c1dfc4, #b7f8db);
   background-size: 300% 300%;
   -webkit-mask-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' fill='black' viewBox='0 0 24 24'><path d='M12 17c-2.5 0-4.71-1.28-6-3.22m12 0C16.71 15.72 14.5 17 12 17m0-10a5 5 0 0 0 0 10 5 5 0 0 0 0-10Zm0-7a12 12 0 1 1 0 24A12 12 0 0 1 0 12 12 12 0 0 1 12 0Z'/></svg>");
   -webkit-mask-repeat: no-repeat;
@@ -194,7 +187,7 @@
 /* MoodEmoji */
 
 .textarea {
-  width: 100%;
+  width: 90%;
   height: 80px;
   resize: none;
   padding: 5px;
